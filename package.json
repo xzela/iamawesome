@@ -1,0 +1,28 @@
+{
+  "name": "iamawesome.ru",
+  "description": " a hot or not clone for the 23rd centry",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xzela/iamawesome.git"
+  },
+  "keywords": [
+    "awesome"
+  ],
+  "author": "Zeph LaFassett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xzela/iamawesome/issues"
+  },
+  "homepage": "https://github.com/xzela/iamawesome",
+  "dependencies": {
+    "express": "3.4.6",
+    "ejs": "*",
+    "sass": "*",
+    "mongojs": "~0.9.11"
+  }
+}
