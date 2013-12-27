@@ -6,10 +6,15 @@
     <script src="/javascripts/lib/underscore.js"></script>
     <script src="/javascripts/lib/jquery.js"></script>
     <script src="/javascripts/lib/backbone.js"></script>
+    <script src="/javascripts/lib/handlebars.js"></script>
     <script src="/javascripts/client.js"></script>
     <script src="/javascripts/init.js"></script>
   </head>
   <body>
     <h1>Some application name here</h1>
+
+    <script id="booktemplate" type="text/x-handlebars">
+      {{name}} - by {{author}}
+    </script>
   </body>
 </html>
