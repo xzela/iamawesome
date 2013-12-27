@@ -5,7 +5,8 @@
 var express = require('express'),
 	routes = require('./routes'),
 	http = require('http'),
-	path = require('path');
+	path = require('path'),
+	database = require('./database');
 
 var app = express();
 
@@ -28,21 +29,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var dbUrl = "library";
-var collections = ['books'];
-
-var db = require('mongojs').connect(dbUrl, collections);
-
 app.get('/', routes.index);
-app.get('/books', function(request, response) {
-	db.books.find({}, function(err, books){
-		if (err) {return;}
-		var json = {
-			books: books
-		}
-		response.json(json);
-	});
-});
+app.get('/books', routes.books.all);
+app.get('/books/:id', routes.books.one);
+
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
