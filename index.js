@@ -28,7 +28,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', routes.books.index);
 app.get('/books', routes.books.all);
 app.get('/books/:id', routes.books.one);
 app.post('/books', routes.books.create);

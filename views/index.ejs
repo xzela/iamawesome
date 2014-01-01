@@ -13,8 +13,21 @@
   <body>
     <h1>Some application name here</h1>
 
+    <div id="initialContent">
+        <%= appData %>
+    </div>
+
+    <div class="app"></div>
+
     <script id="booktemplate" type="text/x-handlebars">
-      {{name}} - by {{author}}
+      <a href="#" class="name">{{name}}</a> - by {{author}}
     </script>
+
+    <script id="detailbooktemplate" type="text/x-handlebars">
+      <h2>{{name}}</h2>
+      <p>Written by: {{author}} </p>
+    </script>
+
+
   </body>
 </html>
