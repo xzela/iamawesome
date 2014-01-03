@@ -51,6 +51,6 @@ app.get('/faces', routes.faces.index);
 app.post('/books', routes.books.create);
 app.post('/faces', routes.faces.save);
 
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
