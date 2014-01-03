@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Some application name here</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/lib/underscore.js"></script>
+    <script src="/javascripts/lib/jquery.js"></script>
+    <script src="/javascripts/lib/backbone.js"></script>
+    <script src="/javascripts/lib/handlebars.js"></script>
+  </head>
+  <body>
+    <h1>Faces</h1>
+
+    <div class="app"></div>
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+    $(function() {
+      // Put event listeners into place
+      var canvas = document.getElementById("canvas"),
+          context = canvas.getContext("2d"),
+          video = document.getElementById("video"),
+          videoObj = { "video": true },
+          errBack = function(error) {
+            console.log("Video capture error: ", error.code);
+          };
+      window.addEventListener("DOMContentLoaded", function() {
+        // Grab elements, create settings, etc.
+
+
+        // Put video listeners into place
+        if(navigator.getUserMedia) { // Standard
+          navigator.getUserMedia(videoObj, function(stream) {
+            video.src = stream;
+            video.play();
+          }, errBack);
+        } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+          navigator.webkitGetUserMedia(videoObj, function(stream){
+            video.src = window.webkitURL.createObjectURL(stream);
+            video.play();
+          }, errBack);
+        }
+        else if(navigator.mozGetUserMedia) { // Firefox-prefixed
+          navigator.mozGetUserMedia(videoObj, function(stream){
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+          }, errBack);
+        }
+      }, false);
+
+      document.getElementById("snap").addEventListener("click", function() {
+        document.getElementById("canvas").getContext("2d").drawImage(video, 0, 0, 640, 480);
+        var image = document.getElementById("canvas");
+        var blob = image.toDataURL();
+        $.ajax({
+          type: 'POST',
+          url: '/faces',
+          data: {
+            imgBase64: blob
+          }
+        }).done(function(o) {
+          console.log(o);
+        });
+
+      });
+    });
+    </script>
+  </body>
+</html>

@@ -3,6 +3,7 @@
   <head>
     <title>Some application name here</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
     <script src="/javascripts/lib/underscore.js"></script>
     <script src="/javascripts/lib/jquery.js"></script>
     <script src="/javascripts/lib/backbone.js"></script>
@@ -20,7 +21,7 @@
     <div class="app"></div>
 
     <script id="booktemplate" type="text/x-handlebars">
-      <a href="#" class="name">{{name}}</a> - by {{author}}
+      <a href="#book/{{_id}}" class="name">{{name}}</a> - by {{author}}
     </script>
 
     <script id="detailbooktemplate" type="text/x-handlebars">

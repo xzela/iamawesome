@@ -11,3 +11,4 @@ exports.index = function(req, res) {
 };
 
 exports.books = require('./books');
+exports.faces = require('./faces');

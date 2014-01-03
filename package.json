@@ -23,6 +23,7 @@
     "express": "3.4.6",
     "ejs": "*",
     "sass": "*",
-    "mongojs": "~0.9.11"
+    "mongojs": "~0.9.11",
+    "connect-mongo": "0.4.0"
   }
 }

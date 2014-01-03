@@ -24,7 +24,7 @@ var BookView = Backbone.View.extend({
 		return this;
 	},
 	singleBookLink: function(e) {
-		e.preventDefault();
+		//e.preventDefault();
 		var id = this.model.get('_id');
 		router.navigate("book/" + id, {trigger: true});
 	}
@@ -75,7 +75,7 @@ var AppRouter = Backbone.Router.extend({
 	_renderView : function(view) {
 		$(".app").html(view.render().el);
 	},
-	index : function() {
+	index: function() {
 		var view = new BookCollectionView({collection: this.collection});
 		this._renderView(view);
 	},
