@@ -10,6 +10,10 @@ var index = function (req, res) {
   });
 };
 
+var addface = function (req, res) {
+  res.render('face', null);
+};
+
 var save = function (req, res) {
   var base64Data = req.body.imgBase64.replace(/^data:image\/png;base64,/, "");
   if (req.method == 'POST') {
@@ -47,6 +51,7 @@ var theirface = function (req, res) {
 };
 
 exports.index = index;
+exports.addface = addface;
 exports.save = save;
 exports.myface = myface;
 exports.theirface = theirface;

@@ -43,6 +43,7 @@ if ('development' == app.get('env')) {
 
 // GETS
 app.get('/', routes.index);
+app.get('/addface', routes.faces.addface);
 app.get('/faces', routes.faces.index);
 app.get('/myface', routes.faces.myface);
 app.get('/theirface/:id', routes.faces.theirface);

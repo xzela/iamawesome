@@ -9,12 +9,15 @@
     <script src="/javascripts/lib/handlebars.js"></script>
   </head>
   <body>
-    <h1>Faces</h1>
-
-    <div class="app"></div>
-
+    <h1>add my face</h1>
+    <p>See that permissions bar? yeah, click "allow"</p>
+    <div class="app">
+      <button id="snap">Snap Photo</button>
+      <button id="kill">Kill Camera</button>
+    </div>
+    <p>To see your face: <a href="/myface"> see your face</a></p>
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button> <button id="kill">Kill Camera</button>
+
     <canvas id="canvas" width="640" height="480"></canvas>
     <script>
     $(function() {
