@@ -1,10 +1,13 @@
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    db = require('mongojs').connect('face-sessions', ['sessions']);
 
 var index = function (req, res) {
-  var data = { session: req.session
-  };
-  res.render('faces', data);
+  db.sessions.find(function (err, others) {
+    //JSON.stringify(books);
+    console.log(others);
+    res.json(others);
+  });
 };
 
 var save = function (req, res) {
@@ -22,18 +25,24 @@ var save = function (req, res) {
 
 var myface = function (req, res) {
   fs.readFile(path.join('public/images/faces', req.session.id + '.png'), function (err, file) {
-    if (err) throw err;
-    res.write(file, "binary");
-    res.end();
+    if (err) {
+      res.end(404, "not found");
+    } else {
+      res.write(file, "binary");
+      res.end();
+    }
   });
 };
 
 var theirface = function (req, res) {
   var sessId = req.params.id;
   fs.readFile(path.join('public/images/faces', sessId + '.png'), function (err, file) {
-    if (err) throw err;
-    res.write(file, "binary");
-    res.end();
+    if (err) {
+      res.send(404, "not found");
+    } else {
+      res.write(file, "binary");
+      res.end();
+    }
   });
 };
 
