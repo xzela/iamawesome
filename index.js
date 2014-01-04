@@ -42,13 +42,13 @@ if ('development' == app.get('env')) {
 }
 
 // GETS
-app.get('/', routes.faces.index);
-app.get('/books', routes.books.all);
-app.get('/books/:id', routes.books.one);
+app.get('/', routes.index);
 app.get('/faces', routes.faces.index);
+app.get('/myface', routes.faces.myface);
+app.get('/theirface/:id', routes.faces.theirface);
 
 // POSTS
-app.post('/books', routes.books.create);
+// app.post('/books', routes.books.create);
 app.post('/faces', routes.faces.save);
 
 http.createServer(app).listen(app.get('port'), function () {

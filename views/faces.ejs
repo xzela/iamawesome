@@ -14,7 +14,7 @@
     <div class="app"></div>
 
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
+    <button id="snap">Snap Photo</button> <button id="kill">Kill Camera</button>
     <canvas id="canvas" width="640" height="480"></canvas>
     <script>
     $(function() {
@@ -25,25 +25,27 @@
           videoObj = { "video": true },
           errBack = function(error) {
             console.log("Video capture error: ", error.code);
-          };
+          },
+          junk;
       window.addEventListener("DOMContentLoaded", function() {
         // Grab elements, create settings, etc.
-
-
         // Put video listeners into place
         if(navigator.getUserMedia) { // Standard
           navigator.getUserMedia(videoObj, function(stream) {
+            junk = stream;
             video.src = stream;
             video.play();
           }, errBack);
         } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
           navigator.webkitGetUserMedia(videoObj, function(stream){
+            junk = stream;
             video.src = window.webkitURL.createObjectURL(stream);
             video.play();
           }, errBack);
         }
         else if(navigator.mozGetUserMedia) { // Firefox-prefixed
-          navigator.mozGetUserMedia(videoObj, function(stream){
+          navigator.webkitGetUserMedia(videoObj, function(stream) {
+            junk = stream;
             video.src = window.URL.createObjectURL(stream);
             video.play();
           }, errBack);
@@ -51,7 +53,7 @@
       }, false);
 
       document.getElementById("snap").addEventListener("click", function() {
-        document.getElementById("canvas").getContext("2d").drawImage(video, 0, 0, 640, 480);
+        canvas.getContext("2d").drawImage(video, 0, 0, 640, 480);
         var image = document.getElementById("canvas");
         var blob = image.toDataURL();
         $.ajax({
@@ -63,7 +65,11 @@
         }).done(function(o) {
           console.log(o);
         });
-
+      });
+      document.getElementById("kill").addEventListener("click", function() {
+        console.log(junk);
+        junk.stop();
+        // document.getElementById("video").getContext("2d").clearRect(0, 0, 640, 480);
       });
     });
     </script>
