@@ -15,7 +15,7 @@
     <h1>I am Awesome. R U?</h1>
     <h2><a href="/addface">Add your face here!</a></h2>
     <script id="facetemplate" type="text/x-handlebars">
-      <a href="/theirface/{{_id}}" class="name">User: {{_id}}</a>
+      <a href="/theirface/{{_id}}" class="name">User: {{_id}} - </a> {{session.hasFile}}
     </script>
 
   </body>

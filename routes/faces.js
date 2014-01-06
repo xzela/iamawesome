@@ -1,13 +1,27 @@
 var fs = require('fs'),
     path = require('path'),
-    db = require('mongojs').connect('face-sessions', ['sessions']);
+    db = require('mongojs').connect('face-sessions', ['sessions']),
+    root = 'public/images/faces';
 
 var index = function (req, res) {
-  db.sessions.find(function (err, others) {
-    //JSON.stringify(books);
-    console.log(others);
-    res.json(others);
+  var data = [];
+  db.sessions.find(function (err, faces) {
+    for (var i = 0; i < faces.length; i++) {
+      var temp = faces[i];
+      temp.session = JSON.parse(faces[i].session);
+      data.push(temp);
+    }
+    console.log(data);
+    res.json(data);
   });
+};
+
+
+var up = function (req, res) {
+  req.session.foobar = new Date().getTime();
+  // console.log(req.session);
+  // db.sessions.update();
+  res.end('session updated');
 };
 
 var addface = function (req, res) {
@@ -16,10 +30,11 @@ var addface = function (req, res) {
 
 var save = function (req, res) {
   var base64Data = req.body.imgBase64.replace(/^data:image\/png;base64,/, "");
+  var sess = req.session;
   if (req.method == 'POST') {
     fs.writeFile(path.join('public/images/faces', req.session.id + '.png'), base64Data, 'base64', function (err) {
       if (err) throw err;
-      console.log('file was saved');
+      sess.hasFile = true;
       res.end('file was saved');
     });
   } else {
@@ -51,6 +66,7 @@ var theirface = function (req, res) {
 };
 
 exports.index = index;
+exports.up = up;
 exports.addface = addface;
 exports.save = save;
 exports.myface = myface;

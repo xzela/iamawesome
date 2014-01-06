@@ -47,7 +47,7 @@ app.get('/addface', routes.faces.addface);
 app.get('/faces', routes.faces.index);
 app.get('/myface', routes.faces.myface);
 app.get('/theirface/:id', routes.faces.theirface);
-
+app.get('/up', routes.faces.up);
 // POSTS
 // app.post('/books', routes.books.create);
 app.post('/faces', routes.faces.save);

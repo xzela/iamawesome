@@ -1,5 +1,5 @@
 var Face = Backbone.Model.extend({
-  idAttribute: "_id",
+  idAttribute: "_id"
 });
 
 var FaceCollection = Backbone.Collection.extend({
